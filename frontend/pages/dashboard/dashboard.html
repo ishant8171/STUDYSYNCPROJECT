@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudySync | Dashboard</title>
+
+    <!-- Fonts (same as auth pages) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css" />
+<link rel="stylesheet" href="../../css/dashboard.css" />
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="topbar">
+        <nav class="nav">
+            <div class="nav-left">
+                <a class="brand" href="./dashboard.html">
+                    <img class="brand-logo" src="../../assets/images/logo/studysync-logo.png" alt="StudySync Logo">
+                    <span class="brand-name">StudySync</span>
+                </a>
+            </div>
+
+            <div class="nav-right" id="navMenu">
+                <a class="nav-link active" href="./dashboard.html">Dashboard</a>
+                <a class="nav-link" href="../subjects/subjects.html">Subjects</a>
+                <a class="nav-link" href="../planner/planner.html">Planner</a>
+                <a class="nav-link" href="../timetable/timetable.html">Timetable</a>
+                <a class="nav-link" href="../resources/resources.html">Resources</a>
+                <a class="nav-link" href="../performance/performance.html">Performance</a>
+                <button class="nav-btn" id="logoutBtn" type="button">Logout</button>
+            </div>
+
+            <!-- Hamburger (ONLY visible on mobile) -->
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                type="button">
+                &#9776;
+            </button>
+        </nav>
+    </header>
+
+    <!-- PAGE -->
+    <main class="page">
+
+        <!-- Container 1 -->
+        <section class="section section-top">
+            <div class="grid-two">
+
+                <!-- Student Details -->
+                <div class="card card-student">
+                    <div class="card-head">
+                        <h2 class="card-title">Student Details</h2>
+                    </div>
+
+                    <div class="student-details">
+                        <div class="detail-row">
+                            <span class="label">Name</span>
+                            <span class="value" id="studentName">—</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Course</span>
+                            <span class="value" id="studentCourse">—</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">ERP ID</span>
+                            <span class="value" id="studentErp">—</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Semester</span>
+                            <span class="value" id="studentSemester">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date -->
+                <div class="card card-date">
+                    <div class="card-head">
+                        <h2 class="card-title">Today</h2>
+                    </div>
+
+                    <div class="today">
+                        <p class="today-day" id="todayDay">—</p>
+                        <p class="today-date" id="todayDate">—</p>
+                        <p class="today-monthyear" id="todayMonthYear">—</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Container 2-->
+        <section class="section section-subjects">
+            <div class="section-head">
+                <h2 class="section-title">Subject Progress</h2>
+                <a class="section-link" href="../subjects/subjects.html">Open Subjects →</a>
+            </div>
+
+            <div class="subject-grid" id="subjectGrid">
+                <!-- JS will render subject cards here -->
+                <!-- Example structure (JS will generate):
+          <div class="card subject-card">
+            <div class="subject-top">
+              <h3>Java</h3>
+              <span>60%</span>
+            </div>
+            <div class="progress-bar"><div class="fill" style="width:60%"></div></div>
+            <p class="muted">3/5 units completed</p>
+          </div>
+        -->
+            </div>
+        </section>
+
+        <!-- ========== CONTAINER 3: OVERALL PROGRESS + STATUS ========== -->
+        <section class="section section-overall">
+            <div class="card card-overall">
+                <div class="section-head">
+                    <h2 class="section-title">Overall Progress</h2>
+                    <span class="overall-percent" id="overallPercent">—%</span>
+                </div>
+
+                <div class="progress-bar lg">
+                    <div class="fill" id="overallFill" style="width:0%"></div>
+                </div>
+
+                <div class="overall-status">
+                    <p class="status-text">
+                        Status:
+                        <span class="status-badge" id="overallStatus">—</span>
+                    </p>
+
+                    <p class="muted" id="overallHint">
+                        Complete more units to improve your status.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CONTAINER 4: TODAY'S TASKS + 2 BUTTONS ========== -->
+        <section class="section section-todos">
+            <div class="grid-two">
+
+                <!-- Task List (Left) -->
+                <div class="card card-todos">
+                    <div class="section-head">
+                        <h2 class="section-title">Today’s To-Do</h2>
+                        <span class="muted" id="todoCount">0 tasks</span>
+                    </div>
+
+                    <ul class="list" id="todoList">
+                        <!-- JS will render tasks here -->
+                    </ul>
+                </div>
+
+                <!-- Buttons (Right) -->
+                <div class="card card-actions">
+                    <div class="card-head">
+                        <h2 class="card-title">Quick Actions</h2>
+                    </div>
+
+                    <div class="actions">
+                        <a class="btn primary" href="../planner/planner.html">Update To-Do</a>
+                        <button class="btn secondary" id="markStudiedBtn" type="button">Mark Today as Studied</button>
+                    </div>
+
+                    <div class="streak-box">
+                        <p class="streak-title">Consistency</p>
+                        <p class="streak-line">
+                            Streak: <strong id="streakCount">0</strong> day(s)
+                        </p>
+                        <p class="streak-line">
+                            Last Studied: <strong id="lastStudied">—</strong>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========== CONTAINER 5: UPCOMING DEADLINES + 2 BUTTONS ========== -->
+        <section class="section section-deadlines">
+            <div class="grid-two">
+
+                <!-- Deadlines List (Left) -->
+                <div class="card card-deadlines">
+                    <div class="section-head">
+                        <h2 class="section-title">Upcoming Deadlines</h2>
+                        <span class="muted" id="deadlineCount">0 items</span>
+                    </div>
+
+                    <ul class="list" id="deadlineList">
+                        <!-- JS will render deadlines here -->
+                    </ul>
+                </div>
+
+                <!-- Buttons (Right) -->
+                <div class="card card-actions">
+                    <div class="card-head">
+                        <h2 class="card-title">Deadline Actions</h2>
+                    </div>
+
+                    <div class="actions">
+                        <a class="btn primary" href="../planner/planner.html">Update Deadlines</a>
+                        <button class="btn secondary" id="setReminderBtn" type="button">Set Reminder</button>
+                    </div>
+
+                    <p class="muted">
+                        Reminder will be shown inside the app (prototype).
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS (we will build next) -->
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/data.js"></script>
+    <script src="../../js/toast.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="../../js/dashboard.js" defer></script>
+    <script src="../../js/reminders.js" defer></script>
+</body>
+
+</html>

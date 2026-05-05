@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudySync | Timetable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/planner.css">
+  <link rel="stylesheet" href="../../css/timetable.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="topbar">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="brand" href="../dashboard/dashboard.html">
+          <img class="brand-logo" src="../../assets/images/logo/studysync-logo.png" alt="StudySync Logo">
+          <span class="brand-name">StudySync</span>
+        </a>
+      </div>
+      <div class="nav-right" id="navMenu">
+        <a class="nav-link" href="../dashboard/dashboard.html">Dashboard</a>
+        <a class="nav-link" href="../subjects/subjects.html">Subjects</a>
+        <a class="nav-link" href="../planner/planner.html">Planner</a>
+        <a class="nav-link active" href="./timetable.html">Timetable</a>
+        <a class="nav-link" href="../resources/resources.html">Resources</a>
+        <a class="nav-link" href="../performance/performance.html">Performance</a>
+        <button class="nav-btn" id="logoutBtn" type="button">Logout</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" type="button">&#9776;</button>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <!-- Header -->
+    <section class="section section-headline">
+      <div class="headline">
+        <div>
+          <h1 class="title">Timetable</h1>
+          <p class="subtitle">Add your weekly class schedule. Today's classes will auto-appear in your To-Do list.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">Today: <strong id="todayText">—</strong></span>
+          <span class="chip">Day: <strong id="todayDay">—</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add Slot Form -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">Add Class Slot</h2>
+            <p class="muted">Add a subject for a specific day and time.</p>
+          </div>
+        </div>
+
+        <form id="slotForm" class="form">
+          <div class="row">
+            <div class="field">
+              <label>Day</label>
+              <select id="slotDay" required>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Subject</label>
+              <input id="slotSubject" type="text" placeholder="e.g., CN / Java" required />
+            </div>
+            <div class="field">
+              <label>Time (e.g., 10:00 AM)</label>
+              <input id="slotTime" type="text" placeholder="10:00 AM" required />
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn primary" type="submit">Add Slot</button>
+            <button class="btn ghost" id="clearTimetableBtn" type="button">Clear All</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Weekly Timetable Grid -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">Weekly Schedule</h2>
+          <span class="badge" id="slotBadge">0</span>
+        </div>
+        <div class="tt-grid" id="ttGrid">
+          <!-- JS renders day columns here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ADAPTIVE TIMETABLE SUGGESTIONS ===== -->
+    <section id="adaptiveSuggestions" style="display:none" class="section">
+      <div class="card" style="border-left:3px solid #2563eb">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">🔄 Adaptive Suggestions</h2>
+            <p class="muted">Some today's classes appear to have been missed. Consider rescheduling:</p>
+          </div>
+        </div>
+        <ul id="adaptiveList" style="list-style:none;padding:0;margin:0"></ul>
+        <p class="muted" style="margin-top:10px;font-size:0.85rem">These are suggestions only — edit your timetable manually above.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/data.js"></script>
+  <script src="../../js/toast.js"></script>
+  <script src="../../js/api.js"></script>
+  <script src="../../js/timetable.js" defer></script>
+  <script src="../../js/reminders.js" defer></script>
+</body>
+</html>

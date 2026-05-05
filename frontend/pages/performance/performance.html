@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudySync | Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/performance.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="topbar">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="brand" href="../dashboard/dashboard.html">
+          <img class="brand-logo" src="../../assets/images/logo/studysync-logo.png" alt="StudySync Logo">
+          <span class="brand-name">StudySync</span>
+        </a>
+      </div>
+      <div class="nav-right" id="navMenu">
+        <a class="nav-link" href="../dashboard/dashboard.html">Dashboard</a>
+        <a class="nav-link" href="../subjects/subjects.html">Subjects</a>
+        <a class="nav-link" href="../planner/planner.html">Planner</a>
+        <a class="nav-link" href="../timetable/timetable.html">Timetable</a>
+        <a class="nav-link" href="../resources/resources.html">Resources</a>
+        <a class="nav-link active" href="./performance.html">Performance</a>
+        <button class="nav-btn" id="logoutBtn" type="button">Logout</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" type="button">&#9776;</button>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <!-- Header -->
+    <section class="section section-headline">
+      <div class="headline">
+        <div>
+          <h1 class="title">Performance</h1>
+          <p class="subtitle">A visual overview of your study progress, tasks, and deadlines.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">Semester: <strong id="semText">—</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stat Cards -->
+    <section class="section">
+      <div class="perf-stats-grid">
+        <div class="card stat-card">
+          <p class="stat-label">Units Completed</p>
+          <p class="stat-value" id="statUnits">—</p>
+          <p class="stat-sub">out of 25 total</p>
+        </div>
+        <div class="card stat-card">
+          <p class="stat-label">Tasks Done</p>
+          <p class="stat-value" id="statTasksDone">—</p>
+          <p class="stat-sub" id="statTasksSub">of — total</p>
+        </div>
+        <div class="card stat-card">
+          <p class="stat-label">Pending Deadlines</p>
+          <p class="stat-value" id="statDeadlines">—</p>
+          <p class="stat-sub">upcoming</p>
+        </div>
+        <div class="card stat-card">
+          <p class="stat-label">Study Streak</p>
+          <p class="stat-value" id="statStreak">—</p>
+          <p class="stat-sub">day(s)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart Row 1 -->
+    <section class="section">
+      <div class="perf-chart-grid">
+
+        <!-- Subject Progress Bar Chart -->
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title">Units Completed Per Subject</h2>
+              <p class="muted">How many units done out of 5</p>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="subjectChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Task Donut -->
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title">To-Do Status</h2>
+              <p class="muted">Done vs Pending tasks</p>
+            </div>
+          </div>
+          <div class="chart-wrap chart-wrap-sm">
+            <canvas id="todoChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Chart Row 2 -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">Upcoming Deadlines</h2>
+            <p class="muted">All deadlines sorted by date</p>
+          </div>
+          <span class="badge" id="deadlineBadge">0</span>
+        </div>
+        <div id="deadlineTable" class="deadline-table"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/data.js"></script>
+  <script src="../../js/toast.js"></script>
+  <script src="../../js/api.js"></script>
+  <script src="../../js/performance.js" defer></script>
+  <script src="../../js/reminders.js" defer></script>
+</body>
+</html>

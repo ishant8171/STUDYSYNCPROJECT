@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudySync | Resources</title>
+  <meta name="description" content="Manage study resources — notes, links, and files — linked to your subjects." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/resources.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="topbar">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="brand" href="../dashboard/dashboard.html">
+          <img class="brand-logo" src="../../assets/images/logo/studysync-logo.png" alt="StudySync Logo">
+          <span class="brand-name">StudySync</span>
+        </a>
+      </div>
+
+      <div class="nav-right" id="navMenu">
+        <a class="nav-link" href="../dashboard/dashboard.html">Dashboard</a>
+        <a class="nav-link" href="../subjects/subjects.html">Subjects</a>
+        <a class="nav-link" href="../planner/planner.html">Planner</a>
+        <a class="nav-link" href="../timetable/timetable.html">Timetable</a>
+        <a class="nav-link active" href="./resources.html">Resources</a>
+        <a class="nav-link" href="../performance/performance.html">Performance</a>
+        <button class="nav-btn" id="logoutBtn" type="button">Logout</button>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" type="button">&#9776;</button>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <!-- Header -->
+    <section class="section">
+      <div class="headline">
+        <div>
+          <h1 class="title">Resources</h1>
+          <p class="subtitle">Manage notes, links, and files linked to your subjects. Convert any resource into a planner task.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">Semester: <strong id="semChip">—</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Grid -->
+    <div class="res-grid">
+
+      <!-- LEFT: Add Resource Form -->
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">Add Resource</h2>
+            <p class="muted">Link study material to a subject.</p>
+          </div>
+        </div>
+
+        <form id="resourceForm" class="form">
+          <div class="field">
+            <label for="resTitle">Title</label>
+            <input id="resTitle" type="text" placeholder="e.g. OSI Model Notes" required maxlength="200" />
+          </div>
+
+          <div class="field">
+            <label for="resType">Type</label>
+            <select id="resType" required>
+              <option value="note">📝 Note</option>
+              <option value="link">🔗 Link / URL</option>
+              <option value="file">📄 File Reference</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="resSubjectSlug">Subject</label>
+            <select id="resSubjectSlug">
+              <option value="">— General (no subject) —</option>
+              <!-- Populated by JS -->
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="resContent">Content / URL / File Path</label>
+            <textarea id="resContent" placeholder="Paste URL, write a note, or enter file path…"></textarea>
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="resImportant" />
+            <label for="resImportant">★ Mark as Important</label>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="submit" id="addResBtn">Add Resource</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- RIGHT: Resource List -->
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">My Resources</h2>
+            <p class="muted">Click "→ Add to Planner" to convert any resource into a study task.</p>
+          </div>
+          <span class="badge" id="resourceBadge">0</span>
+        </div>
+
+        <!-- Filter -->
+        <div class="filter-row">
+          <label for="filterSubject">Filter:</label>
+          <select id="filterSubject">
+            <option value="">All Subjects</option>
+            <!-- Populated by JS -->
+          </select>
+        </div>
+
+        <div class="list-wrap">
+          <ul class="list" id="resourceList">
+            <li class="empty">Loading…</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/data.js"></script>
+  <script src="../../js/toast.js"></script>
+  <script src="../../js/api.js"></script>
+  <script src="../../js/resources.js" defer></script>
+  <script src="../../js/reminders.js" defer></script>
+
+  <!-- Set semester chip -->
+  <script>
+    (function() {
+      const profile = JSON.parse(localStorage.getItem("studentProfile") || "{}");
+      const sem = document.getElementById("semChip");
+      if (sem) sem.textContent = profile.semester || "—";
+    })();
+  </script>
+</body>
+</html>

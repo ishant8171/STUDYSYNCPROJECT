@@ -1,0 +1,103 @@
+/* timetable.css */
+
+.tt-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .tt-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 500px) {
+  .tt-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.tt-day-col {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: white;
+  transition: var(--transition);
+}
+
+.tt-day-col:hover {
+  border-color: rgba(10, 36, 64, 0.15);
+  box-shadow: var(--shadow);
+}
+
+.tt-day-header {
+  background: var(--navy-800);
+  color: white;
+  text-align: center;
+  padding: 10px 6px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.tt-day-header.today-header {
+  background: #2563eb;
+}
+
+.tt-slots {
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+  min-height: 60px;
+}
+
+.tt-slot {
+  background: #fcfdfe;
+  border: 1px solid rgba(10,36,64,0.06);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.tt-slot:hover {
+  background: white;
+  border-color: rgba(37, 99, 235, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tt-slot-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tt-slot-subject {
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: var(--navy-900);
+}
+
+.tt-slot-time {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.tt-del {
+  background: transparent;
+  border: none;
+  color: #d44a4a;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.tt-empty {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  padding: 8px 4px;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudySync | Planner</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Common + Page CSS -->
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/planner.css">
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header class="topbar">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="brand" href="../dashboard/dashboard.html">
+          <img class="brand-logo" src="../../assets/images/logo/studysync-logo.png" alt="StudySync Logo">
+          <span class="brand-name">StudySync</span>
+        </a>
+      </div>
+
+      <div class="nav-right" id="navMenu">
+                <a class="nav-link" href="../dashboard/dashboard.html">Dashboard</a>
+                <a class="nav-link" href="../subjects/subjects.html">Subjects</a>
+                <a class="nav-link active" href="../planner/planner.html">Planner</a>
+                <a class="nav-link" href="../timetable/timetable.html">Timetable</a>
+                <a class="nav-link" href="../resources/resources.html">Resources</a>
+                <a class="nav-link" href="../performance/performance.html">Performance</a>
+                <button class="nav-btn" id="logoutBtn" type="button">Logout</button>
+            </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" type="button">
+        &#9776;
+      </button>
+    </nav>
+  </header>
+
+  <main class="page">
+    <!-- HEADER -->
+    <section class="section section-headline">
+      <div class="headline">
+        <div>
+          <h1 class="title">Planner</h1>
+          <p class="subtitle">Add study tasks and deadlines here. Dashboard will show the latest items.</p>
+        </div>
+
+        <div class="chips">
+          <span class="chip">Today: <strong id="todayText">—</strong></span>
+          <span class="chip">Semester: <strong id="semText">—</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID -->
+    <section class="planner-grid">
+      <!-- LEFT: TODOS -->
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">To-Do List (Study Only)</h2>
+            <p class="muted">Keep tasks academic: revision, practice, reading, etc.</p>
+          </div>
+          <span class="badge" id="todoBadge">0</span>
+        </div>
+
+        <form id="todoForm" class="form">
+          <div class="row">
+            <div class="field">
+              <label>Subject</label>
+              <select id="todoSubject" required>
+                <option value="">Select Subject</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Type</label>
+              <select id="todoType" required>
+                <option value="Revision">Revision</option>
+                <option value="Practice">Practice</option>
+                <option value="Reading">Reading</option>
+                <option value="Assignment">Assignment</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label>Unit (1–5)</label>
+              <input id="todoUnit" type="number" min="1" max="5" placeholder="1" />
+            </div>
+
+            <div class="field">
+              <label>Duration (minutes)</label>
+              <input id="todoDuration" type="number" min="5" max="600" placeholder="30" />
+            </div>
+
+            <div class="field">
+              <label>Date</label>
+              <input id="todoDate" type="date" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="submit">Add Task</button>
+            <button class="btn ghost" id="clearTodoBtn" type="button">Clear All Tasks</button>
+          </div>
+        </form>
+
+        <div class="list-wrap">
+          <ul class="list" id="todoList"></ul>
+        </div>
+      </section>
+
+      <!-- RIGHT: DEADLINES -->
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">Deadlines</h2>
+            <p class="muted">Add tests, mid-sems, end-sems, or assignments.</p>
+          </div>
+          <span class="badge" id="deadlineBadge">0</span>
+        </div>
+
+        <form id="deadlineForm" class="form">
+          <div class="row">
+            <div class="field">
+              <label>Type</label>
+              <select id="deadlineType" required>
+                <option value="Mid-sem">Mid-sem</option>
+                <option value="End-sem">End-sem</option>
+                <option value="Test">Test</option>
+                <option value="Assignment">Assignment</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Subject</label>
+              <select id="deadlineSubject" required>
+                <option value="">Select Subject</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label>Date</label>
+              <input id="deadlineDate" type="date" required />
+            </div>
+
+            <div class="field">
+              <label>Notes (optional)</label>
+              <input id="deadlineNotes" type="text" placeholder="e.g., Unit 2 important topics" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="submit">Add Deadline</button>
+            <button class="btn ghost" id="clearDeadlineBtn" type="button">Clear All Deadlines</button>
+          </div>
+        </form>
+
+        <div class="list-wrap">
+          <ul class="list" id="deadlineList"></ul>
+        </div>
+      </section>
+    </section>
+
+    <!-- ===== SMART SUGGESTIONS PANEL ===== -->
+    <section class="section">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title">✨ Smart Study Suggestions</h2>
+            <p class="muted">AI-ranked tasks based on deadlines, subject progress, and priority.</p>
+          </div>
+          <button class="btn primary" id="getSuggestionsBtn" type="button" style="white-space:nowrap">✨ Get Smart Suggestions</button>
+        </div>
+        <div class="list-wrap">
+          <ul class="list" id="suggestionList">
+            <li class="empty">Click "Get Smart Suggestions" to analyze your tasks.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/data.js"></script>
+  <script src="../../js/toast.js"></script>
+  <script src="../../js/api.js"></script>
+  <script src="../../js/planner.js" defer></script>
+  <script src="../../js/reminders.js" defer></script>
+</body>
+</html>

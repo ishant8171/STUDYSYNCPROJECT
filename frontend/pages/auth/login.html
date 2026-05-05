@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudySync | Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/auth.css" />
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- LEFT: BRAND -->
+    <section class="brand">
+      <div class="brand-inner">
+        <img
+          class="brand-logo"
+          src="../../assets/images/logo/studysync-logo.png"
+          alt="StudySync Logo"
+        />
+        <h1 class="brand-title">StudySync</h1>
+        <p class="brand-tagline">Track smart, study better.</p>
+      </div>
+    </section>
+
+    <!-- RIGHT: LOGIN CARD -->
+    <main class="auth">
+      <div class="card">
+        <div class="card-head">
+          <h2>Welcome back</h2>
+          <p class="muted">Login to continue to your dashboard.</p>
+        </div>
+
+        <!-- IMPORTANT: data-page="login" MUST EXIST -->
+        <form class="form" id="loginForm" data-page="login" autocomplete="on">
+
+          <label class="field">
+            <span>ERP ID</span>
+            <input
+              type="text"
+              name="erp"
+              placeholder="Enter your ERP ID"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              minlength="4"
+              required
+            />
+          </label>
+
+          <div class="row">
+            <label class="checkbox">
+              <input type="checkbox" />
+              <span>Remember me</span>
+            </label>
+
+            <a class="link" href="#" onclick="showToast('Password reset coming soon.', 'info'); return false;">
+              Forgot password?
+            </a>
+          </div>
+
+          <button class="btn primary" type="submit">Login</button>
+
+          <div class="divider"><span>or</span></div>
+
+          <a class="btn ghost" href="register.html">Create new account</a>
+
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/toast.js"></script>
+  <script src="../../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudySync | Subjects</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/subjects.css" />
+
+    <!-- CSS (we’ll create next) -->
+    <link rel="stylesheet" href="../../css/subjects.css" />
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <header class="topbar">
+        <nav class="nav">
+            <div class="nav-left">
+                <a class="brand" href="../dashboard/dashboard.html">
+                    <img class="brand-logo" src="../../assets/images/logo/studysync-logo.png" alt="StudySync Logo">
+                    <span class="brand-name">StudySync</span>
+                </a>
+            </div>
+
+            <!-- Menu -->
+            <div class="nav-right" id="navMenu">
+                <a class="nav-link" href="../dashboard/dashboard.html">Dashboard</a>
+                <a class="nav-link active" href="../subjects/subjects.html">Subjects</a>
+                <a class="nav-link" href="../planner/planner.html">Planner</a>
+                <a class="nav-link" href="../timetable/timetable.html">Timetable</a>
+                <a class="nav-link" href="../resources/resources.html">Resources</a>
+                <a class="nav-link" href="../performance/performance.html">Performance</a>
+                <button class="nav-btn" id="logoutBtn" type="button">Logout</button>
+            </div>
+
+            <!-- Hamburger -->
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"
+                type="button">
+                &#9776;
+            </button>
+        </nav>
+    </header>
+
+    <!-- ========== PAGE ========== -->
+    <main class="page">
+
+        <!-- Header Section -->
+        <section class="section section-headline">
+            <div class="headline">
+                <div>
+                    <h1 class="title">Subjects</h1>
+                    <p class="subtitle">
+                        Tick each lecture as you attend it. Once all 8 lectures in a unit are done, the unit completes automatically and a revision task is added to your To-Do list.
+                    </p>
+                </div>
+
+                <div class="semester-chip">
+                    Semester: <strong id="semText">—</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subjects Container -->
+        <section class="section section-subjects">
+            <div class="section-bar">
+                <h2 class="section-title">Your Subjects</h2>
+                <span class="muted" id="subjectCount">0 subjects</span>
+            </div>
+
+            <!-- JS will render subject cards here -->
+            <div class="subjects-grid" id="subjectsGrid">
+                <!-- Example card (JS will generate):
+        <div class="card subject-card">
+          <div class="subject-top">
+            <h3 class="subject-name">Computer Networks</h3>
+            <span class="percent">40%</span>
+          </div>
+
+          <div class="units">
+            <label class="unit"><input type="checkbox"> Unit 1</label>
+            ...
+          </div>
+
+
+        </div>
+        -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS (we’ll create next) -->
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/data.js"></script>
+    <script src="../../js/toast.js"></script>
+    <script src="../../js/api.js"></script>
+    <script src="../../js/subjects.js" defer></script>
+    <script src="../../js/reminders.js" defer></script>
+</body>
+
+</html>
