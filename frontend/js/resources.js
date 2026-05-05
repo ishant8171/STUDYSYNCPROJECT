@@ -57,6 +57,18 @@ function renderResources(list) {
     };
     const tagStyle = typeColors[r.type] || typeColors.note;
 
+    let contentHTML = "";
+    if (r.content) {
+      const isUrl = r.content.startsWith("http") || r.type === "link";
+      if (isUrl) {
+        contentHTML = `<a href="${r.content}" target="_blank" class="res-link" style="color:#2563eb;text-decoration:underline;word-break:break-all">${r.content.slice(0, 80)}${r.content.length > 80 ? "..." : ""} ↗</a>`;
+      } else {
+        contentHTML = `<span style="color:var(--muted);word-break:break-all">${r.content.slice(0, 80)}${r.content.length > 80 ? "..." : ""}</span>`;
+      }
+    } else {
+      contentHTML = `<em style="color:var(--muted)">No content</em>`;
+    }
+
     li.innerHTML = `
       <div class="item-top">
         <div style="flex:1;min-width:0">
@@ -67,7 +79,7 @@ function renderResources(list) {
           </p>
           <p class="item-meta" style="margin-top:4px">
             ${r.subjectName ? "<strong>" + r.subjectName + "</strong> · " : ""}
-            ${r.content ? '<span style="color:var(--muted);word-break:break-all">' + r.content.slice(0, 80) + (r.content.length > 80 ? "…" : "") + "</span>" : "<em style='color:var(--muted)'>No content</em>"}
+            ${contentHTML}
           </p>
         </div>
       </div>
