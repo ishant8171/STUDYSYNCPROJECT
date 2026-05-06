@@ -24,6 +24,34 @@ const app      = express();
 const PORT     = process.env.PORT     || 5000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/studysync";
 
+// ===== General Middleware =====
+const allowedOrigins = [
+  'http://localhost:5500',
+  'http://127.0.0.1:5500',
+  'https://studysyncproject-3.onrender.com',
+  'https://studysyncproject-4.onrender.com'
+];
+
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL.replace(/\/$/, ""));
+}
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.warn(`⚠️ CORS blocked for origin: ${origin}`);
+      callback(null, false);
+    }
+  },
+  credentials: true
+}));
+
+app.use(express.json({ limit: "1mb" }));
+
 // ===== Security Middleware =====
 app.use(helmet());
 
@@ -43,10 +71,6 @@ const authLimiter = rateLimit({
   max:      20,
   message:  { message: "Too many auth attempts. Please try again in 15 minutes." }
 });
-
-// ===== General Middleware =====
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5500' }));
-app.use(express.json({ limit: "1mb" }));
 
 // ===== Routes =====
 app.use("/api/auth",        authLimiter, authRoutes);
